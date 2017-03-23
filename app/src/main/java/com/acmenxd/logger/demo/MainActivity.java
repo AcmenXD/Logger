@@ -15,6 +15,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * @author AcmenXD
+ * @version v1.0
+ * @github https://github.com/AcmenXD
+ * @date 2016/11/22 14:36
+ * @detail something
+ */
 public class MainActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Logger.i(LogTag.mk("MainActivity"), "test1", "test2");
         Logger.w(new NullPointerException());
         Logger.e(LogTag.mk("MainActivity"), new NullPointerException());
-        Logger.a(new NullPointerException(), "test1", "test2");
+        Logger.e(new NullPointerException(), "test1", "test2");
         Logger.a(LogTag.mk("MainActivity"), new NullPointerException(), "test1", "test2");
         /**
          * json格式输出
@@ -67,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         /**
          * file格式输出 - 输出到本地文件
          */
-
         File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Log/");
         Logger.file("test1");
         Logger.file("test1", "test2");
