@@ -1,7 +1,7 @@
 # Logger
 ---
 超简单的 Android 日志输出工具Logger
-###**依赖**
+**依赖**
 ---
 - AndroidStudio
 ```
@@ -15,7 +15,7 @@
 ```
 	 compile 'com.github.AcmenXD:Logger:1.0'
 ```
-###**功能**
+**功能**
 ---
 - 设置Logger开关
 - 设置Logger显示级别
@@ -27,7 +27,7 @@
 - 支持Android Monitor中点击日志,跳转到调用代码位置
 - 设置Log开关
 - 设置Log开关
-###**配置**
+**配置**
 ---
 **在Application中配置**
 ```java
@@ -53,7 +53,7 @@ Logger.setPath(Environment.getExternalStorageDirectory().getAbsolutePath() + "/L
  */
 Logger.setPkgName(getPackageName());
 ```
-###**使用**
+**使用**
 ---
 ```java
 /**
@@ -222,8 +222,7 @@ E/com.acmenxd.logger.demo.MainActivity.java:║ * [ Logger -=(MainActivity.java:
 E/com.acmenxd.logger.demo.MainActivity.java:║ save log success ! location is >> /storage/emulated/0/Log/Log_2017032318065140848.txt
 E/com.acmenxd.logger.demo.MainActivity.java:╚═════════════════════════════════════════════════════════════════════════════════════════
 ```
-###**打个小广告^_^**
-gitHub : https://github.com/AcmenXD  如对您有帮助,欢迎点Star支持,谢谢~
-技术博客 : http://blog.csdn.net/wxd_beijing
-
+**打个小广告^_^**
+**gitHub** : https://github.com/AcmenXD  如对您有帮助,欢迎点Star支持,谢谢~
+**技术博客** : http://blog.csdn.net/wxd_beijing
 # END
