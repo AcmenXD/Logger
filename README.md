@@ -52,7 +52,7 @@ Logger.setPath(Environment.getExternalStorageDirectory().getAbsolutePath() + "/L
  */
 Logger.setPkgName(getPackageName());
 ```
-### 使用
+### 使用 -> 以下代码 注释很详细、很重要很重要很重要!!!
 ---
 ```java
 /**
