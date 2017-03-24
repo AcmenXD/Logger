@@ -12,7 +12,7 @@
 	}
 ```
 ```
-	 compile 'com.github.AcmenXD:Logger:1.0'
+	 compile 'com.github.AcmenXD:Logger:1.1'
 ```
 ### 功能
 ---
