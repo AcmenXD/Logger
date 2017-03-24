@@ -36,6 +36,9 @@ public final class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
+        /**
+         * 配置Logger
+         */
         Logger.setOpen(true);
         Logger.setLevel(LogType.V);
         Logger.setPath(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Log/");

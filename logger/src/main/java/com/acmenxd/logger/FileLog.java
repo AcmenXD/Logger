@@ -2,7 +2,7 @@ package com.acmenxd.logger;
 
 import android.text.TextUtils;
 
-import com.acmenxd.logger.utils.RandomUtils;
+import com.acmenxd.logger.utils.LoggerUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -101,7 +101,7 @@ public class FileLog {
     private static String getFileName() {
         Random random = new Random();
         StringBuilder stringBuilder = new StringBuilder("Log_");
-        stringBuilder.append(RandomUtils.getRandomByTime());
+        stringBuilder.append(LoggerUtils.getRandomByTime());
         stringBuilder.append(".txt");
         return stringBuilder.toString();
     }
