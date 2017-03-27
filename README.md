@@ -32,9 +32,9 @@
 ```java
 /**
  * 设置Log开关,可根据debug-release配置
- *  默认为false
+ *  默认为true
  */
-Logger.setOpen(true);
+Logger.setOpen(false);
 /**
  * 设置Log等级, >= 这个此配置的log才会显示
  *  默认为LogType.V

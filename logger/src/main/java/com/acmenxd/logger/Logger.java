@@ -13,7 +13,7 @@ import java.io.File;
  */
 public class Logger extends BaseLog {
     // Log开关
-    private static boolean LOG_OPEN = false;
+    private static boolean LOG_OPEN = true;
     // Log显示Level, >= 这个Level的log才显示
     private static LogType LOG_LEVEL = LogType.V;
     // Log日志默认保存路径
