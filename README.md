@@ -12,7 +12,7 @@
 	}
 ```
 ```
-	 compile 'com.github.AcmenXD:Logger:1.1'
+	 compile 'com.github.AcmenXD:Logger:1.3'
 ```
 ### 功能
 ---
@@ -29,26 +29,26 @@
 **在Application中配置**
 ```java
 /**
+ * 初始化
+ * context必须设置
+ */
+Logger.setContext(context);
+/**
  * 设置Log开关,可根据debug-release配置
  *  默认为true
  */
 Logger.setOpen(false);
 /**
- * 设置Log等级, >= 这个此配置的log才会显示
- *  默认为LogType.V
+ * 设置Log等级, >= 这个配置的log才会显示
+ * 默认为Log.VERBOSE = 2
  */
-Logger.setLevel(LogType.V);
+Logger.setLevel(Log.VERBOSE);
 /**
  * 设置本地Log日志的存储路径
- *  默认为sd卡Log目录下
- * Environment.getExternalStorageDirectory().getAbsolutePath() + "/Log/"
+ * 默认为sd卡Logger目录下
+ * Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logger/"
  */
 Logger.setPath(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Log/");
-/**
- * 设置包名,当Log无tag时,默认tag为 '包名+调用类名'
- *  默认为""
- */
-Logger.setPkgName(getPackageName());
 ```
 ### 使用 -> 以下代码 注释很详细、很重要很重要很重要!!!
 ---

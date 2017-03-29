@@ -1,5 +1,6 @@
 package com.acmenxd.logger;
 
+import android.content.Context;
 import android.os.Environment;
 
 import java.io.File;
@@ -17,39 +18,51 @@ public class Logger extends BaseLog {
     // Log显示Level, >= 这个Level的log才显示
     private static LogType LOG_LEVEL = LogType.V;
     // Log日志默认保存路径
-    private static File LOGFILE_PATH = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Log/");
+    private static File LOGFILE_PATH = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logger/");
     // 包名
-    private static String APP_PKG_NAME = "";
+    private static String APP_PKG_NAME = "Logger";
+    private static Context sContext; // 上下文对象
 
     private static final String PARAM = "param";
     private static final String NULL = "null";
 
     /**
-     * 设置Log开关
+     * 初始化
+     * context必须设置
+     */
+    public static void setContext(Context pContext) {
+        sContext = pContext;
+        APP_PKG_NAME = sContext.getPackageName();
+    }
+
+    /**
+     * 设置Log开关,可根据debug-release配置
+     * 默认为true
      */
     public static void setOpen(boolean isOpen) {
         LOG_OPEN = isOpen;
     }
 
     /**
-     * 设置Log显示等级, >= LOG_LEVEL的log显示
+     * 设置Log等级, >= 这个配置的log才会显示
+     * 默认为Log.VERBOSE = 2
      */
-    public static void setLevel(LogType level) {
-        LOG_LEVEL = level;
+    public static void setLevel(int level) {
+        LogType[] types = LogType.values();
+        for (int i = 0, len = types.length; i < len; i++) {
+            if (level == types[i].intValue()) {
+                LOG_LEVEL = types[i];
+            }
+        }
     }
 
     /**
-     * 设置Log日志默认保存路径
+     * 设置本地Log日志的存储路径
+     * 默认为sd卡Logger目录下
+     * Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logger/"
      */
     public static void setPath(String path) {
         LOGFILE_PATH = new File(path);
-    }
-
-    /**
-     * 设置Log日志包名
-     */
-    public static void setPkgName(String pkgName) {
-        APP_PKG_NAME = pkgName + ".";
     }
 
     // V
