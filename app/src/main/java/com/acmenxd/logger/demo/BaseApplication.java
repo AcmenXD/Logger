@@ -3,8 +3,8 @@ package com.acmenxd.logger.demo;
 import android.app.Application;
 import android.content.res.Configuration;
 import android.os.Environment;
+import android.util.Log;
 
-import com.acmenxd.logger.LogType;
 import com.acmenxd.logger.Logger;
 
 
@@ -39,10 +39,10 @@ public final class BaseApplication extends Application {
         /**
          * 配置Logger
          */
+        Logger.setContext(this);
         Logger.setOpen(true);
-        Logger.setLevel(LogType.V);
-        Logger.setPath(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Log/");
-        Logger.setPkgName(getPackageName());
+        Logger.setLevel(Log.VERBOSE);
+        Logger.setPath(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logger/");
         // 初始化完毕
         isInitFinish = true;
     }
