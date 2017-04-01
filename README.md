@@ -1,6 +1,8 @@
 # Logger
 超简单的 Android 日志输出工具Logger
-* 如要了解功能实现,请运行app程序查看控制台日志和源代码! apk下载路径 : <a href="https://github.com/AcmenXD/Resource/blob/master/apks/Logger.apk">Logger.apk</a>
+* 如要了解功能实现,请运行app程序查看控制台日志和源代码!
+源代码      : <a href="https://github.com/AcmenXD/Logger">Logger</a>
+apk下载路径 : <a href="https://github.com/AcmenXD/Resource/blob/master/apks/Logger.apk">Logger.apk</a>
 ### 依赖
 ---
 - AndroidStudio
