@@ -16,7 +16,7 @@
 	}
 ```
 ```
-	 compile 'com.github.AcmenXD:Logger:1.3'
+	 compile 'com.github.AcmenXD:Logger:1.4'
 ```
 ### 功能
 ---
