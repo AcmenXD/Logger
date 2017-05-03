@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.acmenxd.logger.demo"
-        minSdkVersion 19
+        minSdkVersion 14
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -32,5 +32,6 @@ dependencies {
     /**
      * 超简单的 Android 日志输出工具Logger
      */
-    compile 'com.github.AcmenXD:Logger:1.3'
+    //    compile 'com.github.AcmenXD:Logger:1.3'
+    compile project(':logger')
 }
