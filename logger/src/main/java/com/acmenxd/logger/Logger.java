@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.Environment;
 
 import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 
 /**
  * @author AcmenXD
@@ -254,7 +257,7 @@ public class Logger extends BaseLog {
         StringBuilder sbHeadStr = new StringBuilder();
         sbHeadStr.append("* [ Logger -=(").append(fileName).append(":").append(lineNumber).append(")=- ")
                 .append(methodNameShort).append(" ]");
-        String tagStr = (tag == null || tag.gTag() == null) ? APP_PKG_NAME + fileName : tag.gTag();
+        String tagStr = (tag == null || tag.gTag() == null) ? APP_PKG_NAME + "." + fileName : tag.gTag();
         String msgStr = getMessagesStr(thr, msgs);
         return new String[]{tagStr, msgStr, sbHeadStr.toString(), className};
     }
@@ -290,10 +293,16 @@ public class Logger extends BaseLog {
             if (thr != null) {
                 stringBuilder.append("\n");
                 stringBuilder.append("* Throwable Message Start ====================\n ");
-                StackTraceElement[] elements = thr.getStackTrace();
-                for (int i = 0; i < elements.length; i++) {
-                    stringBuilder.append("\t").append(elements[i]).append("\n");
+                Writer writer = new StringWriter();
+                PrintWriter printWriter = new PrintWriter(writer);
+                thr.printStackTrace(printWriter);
+                Throwable cause = thr.getCause();
+                while (cause != null) {
+                    cause.printStackTrace(printWriter);
+                    cause = cause.getCause();
                 }
+                printWriter.close();
+                stringBuilder.append("\t").append(writer.toString());
                 stringBuilder.append("* Throwable Message End ====================");
             }
             return stringBuilder.toString();

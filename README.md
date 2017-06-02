@@ -16,10 +16,13 @@
 	}
 ```
 ```
-	 compile 'com.github.AcmenXD:Logger:1.4'
+	 compile 'com.github.AcmenXD:Logger:1.5'
 ```
 ### 功能
 ---
+####v1.5 更新内容:
+- Logger输出Throwable日志时的优化
+    
 ####v1.4 新增功能有:
 - 调整兼容版本,支持4.0(含)以上系统
 
