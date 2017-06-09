@@ -1,5 +1,7 @@
 package com.acmenxd.logger;
 
+import android.support.annotation.NonNull;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,11 +13,11 @@ import org.json.JSONObject;
  * @date 2016/11/22 14:36
  * @detail 输出日志Json
  */
-public class JsonLog {
+public final class JsonLog {
     private static final int JSON_INDENT = 4; //缩进
     private static final String LINE_SEPARATOR = System.getProperty("line.separator");//行分隔
 
-    public static void printJson(LogTag tag, String headString, String msg) {
+    public static void printJson(@NonNull LogTag tag, @NonNull String headString, @NonNull String msg) {
         String message;
         try {
             String str = checkStartChar(msg);
@@ -44,7 +46,7 @@ public class JsonLog {
         BaseLog.printLine(LogType.JSON, tag, false);
     }
 
-    private static String checkStartChar(String msg) {
+    private static String checkStartChar(@NonNull String msg) {
         if (msg.startsWith("\n") || msg.startsWith("\t")) {
             return checkStartChar(msg.substring(1, msg.length()));
         }

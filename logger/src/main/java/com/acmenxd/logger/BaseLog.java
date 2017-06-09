@@ -1,5 +1,6 @@
 package com.acmenxd.logger;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -10,11 +11,11 @@ import android.util.Log;
  * @date 2016/11/22 14:36
  * @detail 顶级Logger类
  */
-public class BaseLog {
+public abstract class BaseLog {
     //单条输出最大字符数
     private static final int MAX_LENGTH = 5000;
 
-    protected static void printSub(LogType type, LogTag tag, String msg) {
+    protected final static void printSub(@NonNull LogType type, @NonNull LogTag tag, @NonNull String msg) {
         switch (type) {
             case V:
                 Log.v(tag.gTag(), msg);
@@ -46,10 +47,10 @@ public class BaseLog {
         }
     }
 
-    protected static void printLog(LogType type, LogTag tag, String message) {
+    protected final static void printLog(@NonNull LogType type, @NonNull LogTag tag, @NonNull String message) {
         String msgs[] = message.split("\n");
         printLine(type, tag, true);
-        for (int i = 0;i<msgs.length;i++){
+        for (int i = 0; i < msgs.length; i++) {
             String msg = msgs[i];
             int index = 0;
             int msgLen = msg.length();
@@ -69,14 +70,13 @@ public class BaseLog {
         printLine(type, tag, false);
     }
 
-
     /**
      * 输出行标记
      *
      * @param tag
      * @param isTop
      */
-    protected static void printLine(LogType type, LogTag tag, boolean isTop) {
+    protected final static void printLine(@NonNull LogType type, @NonNull LogTag tag, boolean isTop) {
         if (isTop) {
             printSub(type, tag, "╔════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════");
         } else {
@@ -84,7 +84,7 @@ public class BaseLog {
         }
     }
 
-    protected static boolean isEmpty(String line) {
+    protected final static boolean isEmpty(String line) {
         return TextUtils.isEmpty(line) || TextUtils.isEmpty(line.trim()) || line.equals("\n") || line.equals("\t");
     }
 

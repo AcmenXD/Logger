@@ -1,5 +1,6 @@
 package com.acmenxd.logger;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.acmenxd.logger.utils.LoggerUtils;
@@ -13,7 +14,6 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
 
 /**
  * @author AcmenXD
@@ -22,9 +22,9 @@ import java.util.Random;
  * @date 2016/11/22 14:36
  * @detail 输出日志到文件
  */
-public class FileLog {
+public final class FileLog {
 
-    public static void printFile(LogTag tag, String headString, String className, String msg, File dirFile, String fileName) {
+    public static void printFile(@NonNull LogTag tag, @NonNull String headString, @NonNull String className, @NonNull String msg, @NonNull File dirFile, @NonNull String fileName) {
         fileName = (TextUtils.isEmpty(fileName)) ? getFileName() : fileName;
         String str = "";
         BaseLog.printLine(LogType.FILE, tag, true);
@@ -38,7 +38,7 @@ public class FileLog {
         BaseLog.printLine(LogType.FILE, tag, false);
     }
 
-    private static boolean save(LogTag tag, File dir, String fileName, String headString, String className, String msg) {
+    private static boolean save(@NonNull LogTag tag, @NonNull File dir, @NonNull String fileName, @NonNull String headString, @NonNull String className, @NonNull String msg) {
         String str = null;
         if (dir == null) {
             str = "Source must not be null";
@@ -99,7 +99,6 @@ public class FileLog {
     }
 
     private static String getFileName() {
-        Random random = new Random();
         StringBuilder stringBuilder = new StringBuilder("Log_");
         stringBuilder.append(LoggerUtils.getRandomByTime());
         stringBuilder.append(".txt");

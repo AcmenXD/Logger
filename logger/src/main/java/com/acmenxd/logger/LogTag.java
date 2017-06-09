@@ -1,5 +1,7 @@
 package com.acmenxd.logger;
 
+import android.support.annotation.NonNull;
+
 /**
  * @author AcmenXD
  * @version v1.0
@@ -7,14 +9,14 @@ package com.acmenxd.logger;
  * @date 2016/12/16 17:55
  * @detail 定义Logger的tag类
  */
-public class LogTag {
+public final class LogTag {
     private String tag;
 
-    private LogTag(String tag) {
+    private LogTag(@NonNull String tag) {
         this.tag = tag;
     }
 
-    public static LogTag mk(String tag) {
+    public static LogTag mk(@NonNull String tag) {
         return new LogTag(tag);
     }
 

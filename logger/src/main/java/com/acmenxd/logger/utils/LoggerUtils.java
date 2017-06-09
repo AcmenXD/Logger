@@ -1,5 +1,7 @@
 package com.acmenxd.logger.utils;
 
+import android.support.annotation.NonNull;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -11,7 +13,7 @@ import java.util.Random;
  * @date 2017/3/24 15:17
  * @detail 工具类
  */
-public class LoggerUtils {
+public final class LoggerUtils {
     /**
      * formatStr 格式
      * 以下属性可以随意组合使用,但转换时需注意,可能出现错误
@@ -52,14 +54,14 @@ public class LoggerUtils {
     /**
      * 获取当前日期  : long(毫秒) -> 2016-12-15 16:10:10 (formatStr)
      */
-    public static String nowDate(String formatStr) {
+    public static String nowDate(@NonNull String formatStr) {
         return dateFormat(nowDate().getTime(), formatStr);
     }
 
     /**
      * 日期格式转换 : long(毫秒) -> 2016-12-15 16:10:10 (formatStr)
      */
-    public static String dateFormat(long date, String formatStr) {
+    public static String dateFormat(long date, @NonNull String formatStr) {
         return new SimpleDateFormat(formatStr).format(new Date(date));
     }
 }

@@ -2,6 +2,7 @@ package com.acmenxd.logger;
 
 import android.content.Context;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -15,7 +16,7 @@ import java.io.Writer;
  * @date 2016/11/22 14:36
  * @detail Logger输出总类
  */
-public class Logger extends BaseLog {
+public final class Logger extends BaseLog {
     // Log开关
     private static boolean LOG_OPEN = true;
     // Log显示Level, >= 这个Level的log才显示
@@ -24,7 +25,8 @@ public class Logger extends BaseLog {
     private static File LOGFILE_PATH = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logger/");
     // 包名
     private static String APP_PKG_NAME = "Logger";
-    private static Context sContext; // 上下文对象
+    // 上下文对象
+    private static Context sContext;
 
     private static final String PARAM = "param";
     private static final String NULL = "null";
@@ -33,7 +35,7 @@ public class Logger extends BaseLog {
      * 初始化
      * context必须设置
      */
-    public static void setContext(Context pContext) {
+    public static void setContext(@NonNull Context pContext) {
         sContext = pContext;
         APP_PKG_NAME = sContext.getPackageName();
     }
@@ -64,50 +66,50 @@ public class Logger extends BaseLog {
      * 默认为sd卡Logger目录下
      * Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logger/"
      */
-    public static void setPath(String path) {
+    public static void setPath(@NonNull String path) {
         LOGFILE_PATH = new File(path);
     }
 
     // V
-    public static void v(Object... msgs) {
+    public static void v(@NonNull Object... msgs) {
         printLog(LogType.V, null, null, parseMsgs(msgs));
     }
 
-    public static void v(LogTag tag, Object... msgs) {
+    public static void v(@NonNull LogTag tag, @NonNull Object... msgs) {
         printLog(LogType.V, tag, null, parseMsgs(msgs));
     }
 
-    public static void v(Throwable e) {
+    public static void v(@NonNull Throwable e) {
         printLog(LogType.V, null, e);
     }
 
-    public static void v(LogTag tag, Throwable e) {
+    public static void v(@NonNull LogTag tag, @NonNull Throwable e) {
         printLog(LogType.V, tag, e);
     }
 
-    public static void v(Throwable e, Object... msgs) {
+    public static void v(@NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.V, null, e, parseMsgs(msgs));
     }
 
-    public static void v(LogTag tag, Throwable e, Object... msgs) {
+    public static void v(@NonNull LogTag tag, @NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.V, tag, e, parseMsgs(msgs));
     }
 
     // json日志
-    public static void json(String jsonFormat) {
+    public static void json(@NonNull String jsonFormat) {
         printLog(LogType.JSON, null, null, jsonFormat);
     }
 
-    public static void json(LogTag tag, String jsonFormat) {
+    public static void json(@NonNull LogTag tag, @NonNull String jsonFormat) {
         printLog(LogType.JSON, tag, null, jsonFormat);
     }
 
     // xml日志
-    public static void xml(String xml) {
+    public static void xml(@NonNull String xml) {
         printLog(LogType.XML, null, null, xml);
     }
 
-    public static void xml(LogTag tag, String xml) {
+    public static void xml(@NonNull LogTag tag, @NonNull String xml) {
         printLog(LogType.XML, tag, null, xml);
     }
 
@@ -118,49 +120,49 @@ public class Logger extends BaseLog {
      * * 注意 : 调用此函数时,如有多个参数,首个参数不能为String类型, 否则会自动调用成 file(String tag, Object... msgs)函数
      * * 尽量避免使用此函数,而使用带有Tag标记的函数
      */
-    public static void file(Object... msgs) {
+    public static void file(@NonNull Object... msgs) {
         printFile(LogType.FILE, null, null, null, null, parseMsgs(msgs));
     }
 
-    public static void file(LogTag tag, Object... msgs) {
+    public static void file(@NonNull LogTag tag, @NonNull Object... msgs) {
         printFile(LogType.FILE, tag, null, null, null, parseMsgs(msgs));
     }
 
-    public static void file(LogTag tag, String fileName, File dirFile, Object... msgs) {
+    public static void file(LogTag tag, String fileName, File dirFile, @NonNull Object... msgs) {
         printFile(LogType.FILE, tag, dirFile, fileName, null, parseMsgs(msgs));
     }
 
     //-------------------------------------------
-    public static void file(Throwable thr) {
+    public static void file(@NonNull Throwable thr) {
         printFile(LogType.FILE, null, null, null, thr);
     }
 
-    public static void file(LogTag tag, Throwable thr) {
+    public static void file(@NonNull LogTag tag, @NonNull Throwable thr) {
         printFile(LogType.FILE, tag, null, null, thr);
     }
 
-    public static void file(LogTag tag, String fileName, Throwable thr) {
+    public static void file(LogTag tag, @NonNull String fileName, @NonNull Throwable thr) {
         printFile(LogType.FILE, tag, null, fileName, thr);
     }
 
-    public static void file(LogTag tag, String fileName, File dirFile, Throwable thr) {
+    public static void file(LogTag tag, String fileName, File dirFile, @NonNull Throwable thr) {
         printFile(LogType.FILE, tag, dirFile, fileName, thr);
     }
     //-------------------------------------------
 
-    public static void file(Throwable thr, Object... msgs) {
+    public static void file(@NonNull Throwable thr, @NonNull Object... msgs) {
         printFile(LogType.FILE, null, null, null, thr, parseMsgs(msgs));
     }
 
-    public static void file(LogTag tag, Throwable thr, Object... msgs) {
+    public static void file(@NonNull LogTag tag, @NonNull Throwable thr, @NonNull Object... msgs) {
         printFile(LogType.FILE, tag, null, null, thr, parseMsgs(msgs));
     }
 
-    public static void file(LogTag tag, String fileName, Throwable thr, Object... msgs) {
+    public static void file(LogTag tag, @NonNull String fileName, @NonNull Throwable thr, @NonNull Object... msgs) {
         printFile(LogType.FILE, tag, null, fileName, thr, parseMsgs(msgs));
     }
 
-    public static void file(LogTag tag, String fileName, File dirFile, Throwable thr, Object... msgs) {
+    public static void file(LogTag tag, String fileName, File dirFile, @NonNull Throwable thr, @NonNull Object... msgs) {
         printFile(LogType.FILE, tag, dirFile, fileName, thr, parseMsgs(msgs));
     }
 
@@ -173,7 +175,7 @@ public class Logger extends BaseLog {
      * @param thr
      * @param msgs
      */
-    private static void printLog(LogType type, LogTag pTag, Throwable thr, String... msgs) {
+    private static void printLog(@NonNull LogType type, LogTag pTag, Throwable thr, String... msgs) {
         if (!LOG_OPEN) {
             //检测开关
             return;
@@ -216,7 +218,7 @@ public class Logger extends BaseLog {
      * @param thr
      * @param msgs
      */
-    private static void printFile(LogType type, LogTag pTag, File dirFile, String fileName, Throwable thr, String... msgs) {
+    private static void printFile(@NonNull LogType type, LogTag pTag, File dirFile, String fileName, Throwable thr, String... msgs) {
         if (!LOG_OPEN) {
             //检测开关
             return;
@@ -246,7 +248,7 @@ public class Logger extends BaseLog {
      * @param msgs
      * @return
      */
-    private static String[] wrapperContent(LogTag tag, Throwable thr, String... msgs) {
+    private static String[] wrapperContent(@NonNull LogTag tag, Throwable thr, String... msgs) {
         int index = 5;
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
         String fileName = stackTrace[index].getFileName();
@@ -317,7 +319,7 @@ public class Logger extends BaseLog {
      * @param msgs
      * @return
      */
-    public static String[] parseMsgs(Object... msgs) {
+    public static String[] parseMsgs(@NonNull Object... msgs) {
         String[] rmsgs = null;
         if (msgs != null) {
             int len = msgs.length;
@@ -330,127 +332,127 @@ public class Logger extends BaseLog {
     }
 
     // D
-    public static void d(Object... msgs) {
+    public static void d(@NonNull Object... msgs) {
         printLog(LogType.D, null, null, parseMsgs(msgs));
     }
 
-    public static void d(LogTag tag, Object... msgs) {
+    public static void d(@NonNull LogTag tag, @NonNull Object... msgs) {
         printLog(LogType.D, tag, null, parseMsgs(msgs));
     }
 
-    public static void d(Throwable e) {
+    public static void d(@NonNull Throwable e) {
         printLog(LogType.D, null, e);
     }
 
-    public static void d(LogTag tag, Throwable e) {
+    public static void d(@NonNull LogTag tag, @NonNull Throwable e) {
         printLog(LogType.D, tag, e);
     }
 
-    public static void d(Throwable e, Object... msgs) {
+    public static void d(@NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.D, null, e, parseMsgs(msgs));
     }
 
-    public static void d(LogTag tag, Throwable e, Object... msgs) {
+    public static void d(@NonNull LogTag tag, @NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.D, tag, e, parseMsgs(msgs));
     }
 
     // I
-    public static void i(Object... msgs) {
+    public static void i(@NonNull Object... msgs) {
         printLog(LogType.I, null, null, parseMsgs(msgs));
     }
 
-    public static void i(LogTag tag, Object... msgs) {
+    public static void i(@NonNull LogTag tag, @NonNull Object... msgs) {
         printLog(LogType.I, tag, null, parseMsgs(msgs));
     }
 
-    public static void i(Throwable e) {
+    public static void i(@NonNull Throwable e) {
         printLog(LogType.I, null, e);
     }
 
-    public static void i(LogTag tag, Throwable e) {
+    public static void i(@NonNull LogTag tag, @NonNull Throwable e) {
         printLog(LogType.I, tag, e);
     }
 
-    public static void i(Throwable e, Object... msgs) {
+    public static void i(@NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.I, null, e, parseMsgs(msgs));
     }
 
-    public static void i(LogTag tag, Throwable e, Object... msgs) {
+    public static void i(@NonNull LogTag tag, @NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.I, tag, e, parseMsgs(msgs));
     }
 
     // W
-    public static void w(Object... msgs) {
+    public static void w(@NonNull Object... msgs) {
         printLog(LogType.W, null, null, parseMsgs(msgs));
     }
 
-    public static void w(LogTag tag, Object... msgs) {
+    public static void w(@NonNull LogTag tag, @NonNull Object... msgs) {
         printLog(LogType.W, tag, null, parseMsgs(msgs));
     }
 
-    public static void w(Throwable e) {
+    public static void w(@NonNull Throwable e) {
         printLog(LogType.W, null, e);
     }
 
-    public static void w(LogTag tag, Throwable e) {
+    public static void w(@NonNull LogTag tag, @NonNull Throwable e) {
         printLog(LogType.W, tag, e);
     }
 
-    public static void w(Throwable e, Object... msgs) {
+    public static void w(@NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.W, null, e, parseMsgs(msgs));
     }
 
-    public static void w(LogTag tag, Throwable e, Object... msgs) {
+    public static void w(@NonNull LogTag tag, @NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.W, tag, e, parseMsgs(msgs));
     }
 
     // E
-    public static void e(Object... msgs) {
+    public static void e(@NonNull Object... msgs) {
         printLog(LogType.E, null, null, parseMsgs(msgs));
     }
 
-    public static void e(LogTag tag, Object... msgs) {
+    public static void e(@NonNull LogTag tag, @NonNull Object... msgs) {
         printLog(LogType.E, tag, null, parseMsgs(msgs));
     }
 
-    public static void e(Throwable e) {
+    public static void e(@NonNull Throwable e) {
         printLog(LogType.E, null, e);
     }
 
-    public static void e(LogTag tag, Throwable e) {
+    public static void e(@NonNull LogTag tag, @NonNull Throwable e) {
         printLog(LogType.E, tag, e);
     }
 
-    public static void e(Throwable e, Object... msgs) {
+    public static void e(@NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.E, null, e, parseMsgs(msgs));
     }
 
-    public static void e(LogTag tag, Throwable e, Object... msgs) {
+    public static void e(@NonNull LogTag tag, @NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.E, tag, e, parseMsgs(msgs));
     }
 
     // A
-    public static void a(Object... msgs) {
+    public static void a(@NonNull Object... msgs) {
         printLog(LogType.A, null, null, parseMsgs(msgs));
     }
 
-    public static void a(LogTag tag, Object... msgs) {
+    public static void a(@NonNull LogTag tag, @NonNull Object... msgs) {
         printLog(LogType.A, tag, null, parseMsgs(msgs));
     }
 
-    public static void a(Throwable e) {
+    public static void a(@NonNull Throwable e) {
         printLog(LogType.A, null, e);
     }
 
-    public static void a(LogTag tag, Throwable e) {
+    public static void a(@NonNull LogTag tag, @NonNull Throwable e) {
         printLog(LogType.A, tag, e);
     }
 
-    public static void a(Throwable e, Object... msgs) {
+    public static void a(@NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.A, null, e, parseMsgs(msgs));
     }
 
-    public static void a(LogTag tag, Throwable e, Object... msgs) {
+    public static void a(@NonNull LogTag tag, @NonNull Throwable e, @NonNull Object... msgs) {
         printLog(LogType.A, tag, e, parseMsgs(msgs));
     }
 
