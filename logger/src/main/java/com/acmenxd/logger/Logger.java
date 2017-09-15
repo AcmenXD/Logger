@@ -1,6 +1,5 @@
 package com.acmenxd.logger;
 
-import android.content.Context;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 
@@ -17,58 +16,20 @@ import java.io.Writer;
  * @detail Logger输出总类
  */
 public final class Logger extends BaseLog {
-    // Log开关
-    private static boolean LOG_OPEN = true;
+    /**
+     * 初始化配置
+     */
+    // 包名 - 默认的Logger输出Tag
+    public static String APP_PKG_NAME = "Logger";
+    // Log开关 - 设置Log开关,可根据debug-release配置
+    public static boolean LOG_OPEN = true;
     // Log显示Level, >= 这个Level的log才显示
-    private static LogType LOG_LEVEL = LogType.V;
-    // Log日志默认保存路径
-    private static File LOGFILE_PATH = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logger/");
-    // 包名
-    private static String APP_PKG_NAME = "Logger";
-    // 上下文对象
-    private static Context sContext;
+    public static LogType LOG_LEVEL = LogType.V;
+    // Log日志的存储路径 -  默认为sd卡Logger目录下
+    public static String LOGFILE_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logger/";
 
     private static final String PARAM = "param";
     private static final String NULL = "null";
-
-    /**
-     * 初始化
-     * context必须设置
-     */
-    public static void setContext(@NonNull Context pContext) {
-        sContext = pContext;
-        APP_PKG_NAME = sContext.getPackageName();
-    }
-
-    /**
-     * 设置Log开关,可根据debug-release配置
-     * 默认为true
-     */
-    public static void setOpen(boolean isOpen) {
-        LOG_OPEN = isOpen;
-    }
-
-    /**
-     * 设置Log等级, >= 这个配置的log才会显示
-     * 默认为Log.VERBOSE = 2
-     */
-    public static void setLevel(int level) {
-        LogType[] types = LogType.values();
-        for (int i = 0, len = types.length; i < len; i++) {
-            if (level == types[i].intValue()) {
-                LOG_LEVEL = types[i];
-            }
-        }
-    }
-
-    /**
-     * 设置本地Log日志的存储路径
-     * 默认为sd卡Logger目录下
-     * Environment.getExternalStorageDirectory().getAbsolutePath() + "/Logger/"
-     */
-    public static void setPath(@NonNull String path) {
-        LOGFILE_PATH = new File(path);
-    }
 
     // V
     public static void v(@NonNull Object... msgs) {
@@ -175,7 +136,7 @@ public final class Logger extends BaseLog {
      * @param thr
      * @param msgs
      */
-    private static void printLog(@NonNull LogType type, LogTag pTag, Throwable thr, String... msgs) {
+    private static synchronized void printLog(@NonNull LogType type, LogTag pTag, Throwable thr, String... msgs) {
         if (!LOG_OPEN) {
             //检测开关
             return;
@@ -218,7 +179,7 @@ public final class Logger extends BaseLog {
      * @param thr
      * @param msgs
      */
-    private static void printFile(@NonNull LogType type, LogTag pTag, File dirFile, String fileName, Throwable thr, String... msgs) {
+    private static synchronized void printFile(@NonNull LogType type, LogTag pTag, File dirFile, String fileName, Throwable thr, String... msgs) {
         if (!LOG_OPEN) {
             //检测开关
             return;
@@ -229,7 +190,7 @@ public final class Logger extends BaseLog {
         }
         //路径
         if (dirFile == null) {
-            dirFile = LOGFILE_PATH;
+            dirFile = new File(LOGFILE_PATH);
         }
         //包装内容
         String[] contents = wrapperContent(pTag, thr, msgs);

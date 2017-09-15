@@ -32,6 +32,6 @@ dependencies {
     /**
      * 超简单的 Android 日志输出工具Logger
      */
-    compile 'com.github.AcmenXD:Logger:2.0'
-//    compile project(':logger')
+//    compile 'com.github.AcmenXD:Logger:2.1'
+    compile project(':logger')
 }
